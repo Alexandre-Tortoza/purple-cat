@@ -5,6 +5,7 @@ import { motion, useAnimationControls } from 'motion/react'
 import { VinylDisc } from '@/shared/ui/VinylDisc'
 import { MENU_A, MENU_B } from '@/shared/config/site'
 import { EASE } from '@/shared/lib/animations'
+import { ScrollStackContent } from '@/shared/ui/ScrollStackCard'
 
 const CARD_W = 460
 const CARD_H = 460
@@ -90,77 +91,111 @@ export function MenuSection() {
   return (
     <section
       id="cardapio"
-      className="flex min-h-[80svh] items-center justify-center border-y border-purple-900/20 bg-[#0d0917]"
+      className="border-y border-purple-900/20 bg-[#0d0917] py-16 sm:py-24 lg:py-32"
     >
-      <div
-        className="relative"
-        style={{ width: CARD_W + DISC_SIZE / 2, height: CARD_H }}
-      >
-        <SoundWaves active={!isFlipping} />
+      <ScrollStackContent>
+        <div className="mx-auto w-full px-6">
+          <div className="text-center">
+            <p className="text-xs font-medium tracking-[0.26em] text-purple-300 uppercase">Cardápio</p>
+            <h2 className="mt-5 text-4xl leading-none tracking-tight text-white sm:text-5xl">Drinks para acompanhar a experiência</h2>
+          </div>
 
-        {/* Disco — metade para fora à direita */}
-        <div
-          style={{
-            position: 'absolute',
-            right: 0,
-            top: '50%',
-            transform: 'translateY(-50%)',
-            zIndex: 0,
-          }}
-        >
-          <motion.div animate={discControls} style={{ x: 0 }}>
-            <VinylDisc size={DISC_SIZE} spinning={isSpinning} />
-          </motion.div>
-        </div>
+          {/* Mobile — só o flip card, sem disco */}
+          <div className="mt-10 sm:hidden">
+            <div style={{ position: 'relative', height: CARD_H, perspective: 1000 }}>
+              <motion.div
+                animate={{ rotateY: rotationY }}
+                transition={{ duration: 0.52, ease: EASE.entrance }}
+                style={{ width: '100%', height: CARD_H, transformStyle: 'preserve-3d', position: 'relative' }}
+              >
+                <div
+                  className="absolute inset-0 overflow-hidden rounded-2xl border border-purple-800/40 bg-[#0a0618]"
+                  style={{ backfaceVisibility: 'hidden' }}
+                >
+                  <CardFace side="A" activeTab={activeTab} onFlip={handleFlip} isFlipping={isFlipping} />
+                </div>
+                <div
+                  className="absolute inset-0 overflow-hidden rounded-2xl border border-stone-200/60 bg-[#f5f0eb]"
+                  style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+                >
+                  <CardFace side="B" activeTab={activeTab} onFlip={handleFlip} isFlipping={isFlipping} />
+                </div>
+              </motion.div>
+            </div>
+          </div>
 
-        {/* Card — na frente do disco */}
-        <div
-          style={{
-            position: 'relative',
-            zIndex: 10,
-            perspective: 1000,
-            width: CARD_W,
-            height: CARD_H,
-          }}
-        >
-          <motion.div
-            animate={{ rotateY: rotationY }}
-            transition={{ duration: 0.52, ease: EASE.entrance }}
-            style={{
-              width: CARD_W,
-              height: CARD_H,
-              transformStyle: 'preserve-3d',
-              position: 'relative',
-            }}
+          {/* Desktop — card + disco lado a lado */}
+          <div
+            className="relative mx-auto mt-14 translate-x-20 hidden sm:block"
+            style={{ width: CARD_W + DISC_SIZE / 2, height: CARD_H }}
           >
-            {/* Frente — Lado A */}
+            <SoundWaves active={!isFlipping} />
+
+            {/* Disco — metade para fora à direita */}
             <div
-              className="absolute inset-0 overflow-hidden rounded-2xl border border-purple-800/40 bg-[#0a0618]"
-              style={{ backfaceVisibility: 'hidden' }}
+              style={{
+                position: 'absolute',
+                right: 0,
+                top: '50%',
+                transform: 'translateY(-50%)',
+                zIndex: 0,
+              }}
             >
-              <CardFace
-                side="A"
-                activeTab={activeTab}
-                onFlip={handleFlip}
-                isFlipping={isFlipping}
-              />
+              <motion.div animate={discControls} style={{ x: 0 }}>
+                <VinylDisc size={DISC_SIZE} spinning={isSpinning} />
+              </motion.div>
             </div>
 
-            {/* Verso — Lado B */}
+            {/* Card — na frente do disco */}
             <div
-              className="absolute inset-0 overflow-hidden rounded-2xl border border-stone-200/60 bg-[#f5f0eb]"
-              style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+              style={{
+                position: 'relative',
+                zIndex: 10,
+                perspective: 1000,
+                width: CARD_W,
+                height: CARD_H,
+              }}
             >
-              <CardFace
-                side="B"
-                activeTab={activeTab}
-                onFlip={handleFlip}
-                isFlipping={isFlipping}
-              />
+              <motion.div
+                animate={{ rotateY: rotationY }}
+                transition={{ duration: 0.52, ease: EASE.entrance }}
+                style={{
+                  width: CARD_W,
+                  height: CARD_H,
+                  transformStyle: 'preserve-3d',
+                  position: 'relative',
+                }}
+              >
+                {/* Frente — Lado A */}
+                <div
+                  className="absolute inset-0 overflow-hidden rounded-2xl border border-purple-800/40 bg-[#0a0618]"
+                  style={{ backfaceVisibility: 'hidden' }}
+                >
+                  <CardFace
+                    side="A"
+                    activeTab={activeTab}
+                    onFlip={handleFlip}
+                    isFlipping={isFlipping}
+                  />
+                </div>
+
+                {/* Verso — Lado B */}
+                <div
+                  className="absolute inset-0 overflow-hidden rounded-2xl border border-stone-200/60 bg-[#f5f0eb]"
+                  style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+                >
+                  <CardFace
+                    side="B"
+                    activeTab={activeTab}
+                    onFlip={handleFlip}
+                    isFlipping={isFlipping}
+                  />
+                </div>
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
         </div>
-      </div>
+      </ScrollStackContent>
     </section>
   )
 }
@@ -242,6 +277,7 @@ function CardFace({ side, activeTab, onFlip, isFlipping }: CardFaceProps) {
 
       {/* Lista de drinks com scrollbar */}
       <div
+        data-lenis-prevent
         className={`mt-4 flex-1 overflow-y-auto pr-2
           [scrollbar-width:thin]
           [scrollbar-color:#000_transparent]
@@ -250,10 +286,15 @@ function CardFace({ side, activeTab, onFlip, isFlipping }: CardFaceProps) {
           [&::-webkit-scrollbar-thumb]:rounded-full
           [&::-webkit-scrollbar-thumb]:bg-black`}
       >
-        {items.map((item) => (
-          <div key={item.name} className={`border-b py-4 last:border-0 ${t.divider}`}>
-            <h4 className={`font-heading text-2xl leading-tight ${t.name}`}>{item.name}</h4>
-            <p className={`mt-1 text-sm leading-relaxed ${t.desc}`}>{item.description}</p>
+        {items.map((item, index) => (
+          <div key={item.name} className={`flex gap-4 border-b py-4 last:border-0 ${t.divider}`}>
+            <span className={`font-heading text-xl leading-tight ${side === 'A' ? 'text-purple-400/70' : 'text-purple-700/70'}`}>
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <div>
+              <h4 className={`font-heading text-2xl leading-tight ${t.name}`}>{item.name}</h4>
+              <p className={`mt-1 text-sm leading-relaxed ${t.desc}`}>{item.description}</p>
+            </div>
           </div>
         ))}
       </div>

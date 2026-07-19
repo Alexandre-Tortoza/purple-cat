@@ -3,10 +3,12 @@
 import { motion } from 'motion/react'
 import { Container } from '@/shared/ui/Container'
 import { RECORD_COLLECTIONS, SITE } from '@/shared/config/site'
+import { ScrollStackContent } from '@/shared/ui/ScrollStackCard'
 
 export function Records() {
   return (
-    <section id="discos" className="bg-[#090710] py-24 sm:py-32">
+    <section id="discos" className="bg-[#090710] py-16 sm:py-24 lg:py-32">
+      <ScrollStackContent>
       <Container className="grid items-start gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:gap-24">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }} transition={{ duration: 0.6 }}>
           <p className="text-xs font-medium tracking-[0.26em] text-purple-300 uppercase">Loja de discos</p>
@@ -28,11 +30,12 @@ export function Records() {
             <p className="mt-2 text-sm leading-relaxed text-zinc-400">Fale com a equipe para consultar disponibilidade, encomendas e novos títulos.</p>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href={SITE.recordsUrl} className="inline-flex rounded-full bg-purple-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-purple-400">Ver seleção de discos</a>
-            <a href="#discos" className="inline-flex rounded-full border border-white/15 px-6 py-3 text-sm font-medium text-zinc-200 transition-colors hover:border-purple-300/50 hover:bg-white/5">Consultar um título</a>
+            <a href={SITE.recordsUrl} className="inline-flex rounded-sm bg-purple-500 px-6 py-3 text-sm font-medium text-white transition-all hover:bg-purple-400 hover:-translate-y-px hover:shadow-[0_6px_24px_rgba(168,85,247,0.4)]">Ver seleção de discos</a>
+            <a href="#discos" className="inline-flex rounded-sm border border-white/15 px-6 py-3 text-sm font-medium text-zinc-200 transition-all hover:border-purple-300/50 hover:bg-white/5 hover:-translate-y-px hover:shadow-[0_6px_24px_rgba(168,85,247,0.4)]">Consultar um título</a>
           </div>
         </motion.div>
       </Container>
+      </ScrollStackContent>
     </section>
   )
 }

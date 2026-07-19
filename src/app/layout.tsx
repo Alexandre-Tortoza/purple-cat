@@ -7,6 +7,8 @@ import { Footer } from "@/widgets/Footer";
 import { PlayBar } from "@/widgets/PlayBar";
 import { Menu } from "@/widgets/Menu";
 import { Cursor } from "@/widgets/Cursor";
+import { ScrollNavigator } from "@/shared/ui/ScrollNavigator";
+import { SITE } from "@/shared/config/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,8 +35,53 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Purple Cat | Listening Bar & Records em Curitiba",
-  description: "Música, drinks, cozinha e discos de vinil em Curitiba.",
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: `${SITE.name} | Listening Bar e Loja de Discos em Curitiba`,
+    template: `%s | ${SITE.name}`,
+  },
+  description: 'Conheça o Purple Cat, listening bar e loja de discos no Centro de Curitiba. Confira agenda, horários, cardápio, novidades em vinil e como chegar.',
+  keywords: [
+    'listening bar Curitiba',
+    'loja de discos Curitiba',
+    'discos de vinil Curitiba',
+    'Purple Cat Curitiba',
+    'eventos musicais Curitiba',
+    'audição de vinil Curitiba',
+    'agenda cultural Curitiba',
+    'bar Centro Curitiba',
+    'curadoria musical Curitiba',
+  ],
+  authors: [{ name: SITE.fullName, url: SITE.url }],
+  creator: SITE.fullName,
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: `${SITE.name} | Listening Bar e Loja de Discos em Curitiba`,
+    description: 'Conheça o Purple Cat, listening bar e loja de discos no Centro de Curitiba. Confira agenda, horários, cardápio, novidades em vinil e como chegar.',
+    url: SITE.url,
+    siteName: SITE.fullName,
+    locale: 'pt_BR',
+    type: 'website',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Purple Cat — Listening Bar e Loja de Discos em Curitiba',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${SITE.name} | Listening Bar e Loja de Discos em Curitiba`,
+    description: 'Conheça o Purple Cat, listening bar e loja de discos no Centro de Curitiba.',
+    images: ['/opengraph-image'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+  },
 };
 
 export default function RootLayout({
@@ -48,6 +95,7 @@ export default function RootLayout({
         <Providers>
           <Cursor />
           <Header />
+          <ScrollNavigator />
           <Menu />
           <main className="flex-1">{children}</main>
           <Footer />

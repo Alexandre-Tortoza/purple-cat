@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'motion/react'
+import { motion, useReducedMotion } from 'motion/react'
 import { DURATION, EASE } from '@/shared/lib/animations'
 
 type Props = {
@@ -10,6 +10,7 @@ type Props = {
 }
 
 export function VinylIntro({ joined = false, spinning = false, showGlow = false }: Props) {
+  const shouldReduce = useReducedMotion()
   const rotation = spinning ? 360 : 0
 
   return (
@@ -29,10 +30,10 @@ export function VinylIntro({ joined = false, spinning = false, showGlow = false 
               filter: ['blur(46px)', 'blur(52px)', 'blur(48px)', 'blur(46px)'],
             }}
             transition={{
-              opacity: { duration: 20, repeat: Infinity, ease: 'easeInOut' },
-              scale: { duration: 26, repeat: Infinity, ease: 'easeInOut' },
-              rotate: { duration: 120, repeat: Infinity, ease: 'linear' },
-              filter: { duration: 30, repeat: Infinity, ease: 'easeInOut' },
+              opacity: { duration: 20, repeat: shouldReduce ? 0 : Infinity, ease: 'easeInOut' },
+              scale: { duration: 26, repeat: shouldReduce ? 0 : Infinity, ease: 'easeInOut' },
+              rotate: { duration: 120, repeat: shouldReduce ? 0 : Infinity, ease: 'linear' },
+              filter: { duration: 30, repeat: shouldReduce ? 0 : Infinity, ease: 'easeInOut' },
             }}
             className="absolute inset-0 rounded-full"
             style={{

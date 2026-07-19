@@ -1,8 +1,10 @@
 import { Container } from '@/shared/ui/Container'
+import { ScrollStackContent } from '@/shared/ui/ScrollStackCard'
 
 export function Manifesto() {
   return (
-    <section className="overflow-hidden bg-purple-500 py-24 text-[#160927] sm:py-32">
+    <section className="overflow-hidden bg-purple-500 py-16 text-[#160927] sm:py-24 lg:py-32">
+      <ScrollStackContent>
       <Container>
         <p className="text-xs font-bold tracking-[0.26em] uppercase">Manifesto</p>
         <div className="mt-8 max-w-4xl">
@@ -15,6 +17,7 @@ export function Manifesto() {
           </div>
         </div>
       </Container>
+      </ScrollStackContent>
     </section>
   )
 }

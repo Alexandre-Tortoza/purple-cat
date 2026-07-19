@@ -1,9 +1,11 @@
 import { Container } from '@/shared/ui/Container'
 import { FAQS } from '@/shared/config/site'
+import { ScrollStackContent } from '@/shared/ui/ScrollStackCard'
 
 export function FAQ() {
   return (
-    <section id="informacoes" className="bg-[#090710] py-24 sm:py-32">
+    <section id="informacoes" className="bg-[#090710] py-16 sm:py-24 lg:py-32">
+      <ScrollStackContent>
       <Container className="grid gap-12 lg:grid-cols-[0.74fr_1.26fr] lg:gap-24">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <p className="text-xs font-medium tracking-[0.26em] text-purple-300 uppercase">Informações úteis</p>
@@ -21,6 +23,7 @@ export function FAQ() {
           ))}
         </div>
       </Container>
+      </ScrollStackContent>
     </section>
   )
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
+import { motion } from 'motion/react'
 import { Container } from '@/shared/ui/Container'
 import { VinylIntro } from '@/shared/ui/VinylIntro'
 import { DURATION, EASE } from '@/shared/lib/animations'
@@ -24,9 +24,9 @@ export function Hero() {
   }, [])
 
   return (
-    <section id="inicio" className="relative flex min-h-svh items-center overflow-hidden bg-[#090710]">
+    <section id="inicio" className="relative flex min-h-svh items-center bg-[#090710]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_48%,rgba(124,58,237,0.16),transparent_23%),radial-gradient(circle_at_15%_95%,rgba(88,28,135,0.14),transparent_34%)]" />
-      <Container className="relative flex min-h-svh items-center py-32">
+      <Container className="relative flex min-h-svh items-center overflow-hidden py-24 sm:py-32">
         {phase !== 'loading' && (
           <motion.div
             className="absolute top-1/2 z-10 hidden sm:block"
@@ -50,40 +50,42 @@ export function Hero() {
           </motion.div>
         )}
 
-        <AnimatePresence>
-          {phase === 'settled' && (
-            <motion.div
-              initial={{ opacity: 0, x: -24 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: DURATION.slow, ease: EASE.standard, delay: 0.45 }}
-              className="relative z-20 max-w-2xl"
+        {/*
+          O conteúdo é sempre renderizado no DOM (incluindo no SSR) para que
+          o Googlebot indexe o H1 e o texto principal sem depender de JS.
+          A visibilidade é controlada por opacity via framer-motion.
+        */}
+        <motion.div
+          initial={{ opacity: 0, x: -24 }}
+          animate={phase === 'settled' ? { opacity: 1, x: 0 } : { opacity: 0, x: -24 }}
+          transition={{ duration: DURATION.slow, ease: EASE.standard, delay: 0.45 }}
+          className="relative z-20 max-w-2xl"
+          aria-hidden={phase !== 'settled' ? true : undefined}
+        >
+          <p className="text-xs font-medium tracking-[0.26em] text-purple-300 uppercase">
+            Listening Bar & Records / Curitiba, Paraná
+          </p>
+          <h1 className="mt-6 max-w-xl text-5xl leading-[0.94] tracking-tight text-white sm:text-6xl lg:text-7xl">
+            Aqui, a música não é apenas ambiente.
+          </h1>
+          <p className="mt-7 max-w-md text-base leading-relaxed text-zinc-400 sm:text-lg">
+            Bar, música e discos para ouvir com atenção, sem pressa e sem excesso.
+          </p>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <a
+              href="#sobre"
+              className="inline-flex items-center justify-center rounded-sm bg-purple-500 px-6 py-3 text-sm font-medium text-white transition-all hover:bg-purple-400 hover:-translate-y-px hover:shadow-[0_6px_24px_rgba(168,85,247,0.4)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-300"
             >
-              <p className="text-xs font-medium tracking-[0.26em] text-purple-300 uppercase">
-                Listening Bar & Records / Curitiba, Paraná
-              </p>
-              <h1 className="mt-6 max-w-xl text-5xl leading-[0.94] tracking-tight text-white sm:text-6xl lg:text-7xl">
-                Aqui, a música não é apenas ambiente.
-              </h1>
-              <p className="mt-7 max-w-md text-base leading-relaxed text-zinc-400 sm:text-lg">
-                Bar, música e discos para ouvir com atenção, sem pressa e sem excesso.
-              </p>
-              <div className="mt-10 flex flex-wrap gap-3">
-                <a
-                  href="#sobre"
-                  className="inline-flex items-center justify-center rounded-full bg-purple-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-purple-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-300"
-                >
-                  Conheça nossa história
-                </a>
-                <a
-                  href="#agenda"
-                  className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 text-sm font-medium text-zinc-200 transition-colors hover:border-purple-300/50 hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-300"
-                >
-                  Ver agenda
-                </a>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              Conheça nossa história
+            </a>
+            <a
+              href="#agenda"
+              className="inline-flex items-center justify-center rounded-sm border border-white/15 px-6 py-3 text-sm font-medium text-zinc-200 transition-all hover:border-purple-300/50 hover:bg-white/5 hover:-translate-y-px hover:shadow-[0_6px_24px_rgba(168,85,247,0.4)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-300"
+            >
+              Ver agenda
+            </a>
+          </div>
+        </motion.div>
       </Container>
     </section>
   )

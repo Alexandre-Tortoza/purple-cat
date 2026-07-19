@@ -2,10 +2,12 @@
 
 import { motion } from 'motion/react'
 import { Container } from '@/shared/ui/Container'
+import { ScrollStackContent } from '@/shared/ui/ScrollStackCard'
 
 export function About() {
   return (
-    <section id="sobre" className="bg-[#0d0917] py-24 sm:py-32">
+    <section id="sobre" className="bg-[#0d0917] py-16 sm:py-24 lg:py-32">
+      <ScrollStackContent>
       <Container className="grid items-start gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:gap-24">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -41,6 +43,7 @@ export function About() {
           </p>
         </motion.div>
       </Container>
+      </ScrollStackContent>
     </section>
   )
 }

@@ -18,7 +18,7 @@ export function Experience() {
   const [hovered, setHovered] = useState<number | null>(null)
 
   return (
-    <section id="experiencia" className="bg-[#090710] py-24 sm:py-32">
+    <section id="experiencia" className="bg-[#090710] py-16 sm:py-24 lg:py-32">
       <Container>
         <div className="max-w-xl">
           <p className="text-xs font-medium tracking-[0.26em] text-purple-300 uppercase">Experiência</p>

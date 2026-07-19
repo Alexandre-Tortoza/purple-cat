@@ -3,10 +3,12 @@
 import { motion } from 'motion/react'
 import { Container } from '@/shared/ui/Container'
 import { EVENTS } from '@/shared/config/site'
+import { ScrollStackContent } from '@/shared/ui/ScrollStackCard'
 
 export function Agenda() {
   return (
-    <section id="agenda" className="border-y border-purple-900/20 bg-[#120b20] py-24 sm:py-32">
+    <section id="agenda" className="border-y border-purple-900/20 bg-[#120b20] py-16 sm:py-24 lg:py-32">
+      <ScrollStackContent>
       <Container>
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
@@ -38,8 +40,9 @@ export function Agenda() {
             </motion.article>
           ))}
         </div>
-        <a href="#agenda" className="mt-10 inline-flex rounded-full border border-purple-300/40 px-6 py-3 text-sm font-medium text-purple-100 transition-colors hover:bg-purple-500 hover:text-white">Ver agenda completa</a>
+        <a href="#agenda" className="mt-10 inline-flex rounded-sm border border-purple-300/40 px-6 py-3 text-sm font-medium text-purple-100 transition-all hover:bg-purple-500 hover:text-white hover:-translate-y-px hover:shadow-[0_6px_24px_rgba(168,85,247,0.4)]">Ver agenda completa</a>
       </Container>
+      </ScrollStackContent>
     </section>
   )
 }
