@@ -16,7 +16,7 @@ export function VinylDisc({ spinning = false, size = 320 }: Props) {
       transition={
         spinning
           ? { duration: 8, repeat: Infinity, ease: 'linear' }
-          : { duration: 0 }
+          : { duration: 0.6, ease: 'easeOut' }
       }
     >
       {/* Disco principal — gradiente roxo com textura de vinil */}
