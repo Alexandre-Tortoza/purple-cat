@@ -45,7 +45,7 @@ function isOpenNow(date: Date): boolean {
 
 function OpeningStatus({ isOpen }: { isOpen: boolean }) {
   return (
-    <span role="status" aria-live="polite" className="inline-flex items-center gap-1 text-xs font-normal text-zinc-500">
+    <span role="status" aria-live="polite" className="inline-flex items-center gap-1 text-xs leading-none font-normal text-zinc-500">
       <span
         aria-hidden="true"
         className={`size-1.5 rounded-full ${isOpen ? 'animate-pulse bg-emerald-400 motion-reduce:animate-none' : 'bg-red-500'}`}
@@ -107,7 +107,7 @@ export function Header() {
               </a>
             ))}
           </nav>
-          <div className="ml-4">
+          <div className="ml-4 flex items-center self-center">
             <OpeningStatus isOpen={isOpen} />
           </div>
           <button
