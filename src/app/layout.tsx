@@ -9,6 +9,8 @@ import { Menu } from "@/widgets/Menu";
 import { Cursor } from "@/widgets/Cursor";
 import { ScrollNavigator } from "@/shared/ui/ScrollNavigator";
 import { SITE } from "@/shared/config/site";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -100,6 +102,8 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
           <PlayBar />
+          <SpeedInsights />
+          <Analytics />
         </Providers>
       </body>
     </html>
