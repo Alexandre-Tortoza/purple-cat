@@ -23,7 +23,18 @@ export function Footer() {
         </div>
         <div className="flex flex-col gap-2 pt-6 text-xs text-zinc-600 sm:flex-row sm:justify-between">
           <p>&copy; {new Date().getFullYear()} Purple Cat. Todos os direitos reservados.</p>
-          <p>Desenvolvido por [nome da sua empresa].</p>
+          <p>
+            Desenvolvido por{' '}
+            <a
+              href="https://alexandre-trotoza.tech"
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors hover:text-purple-300"
+            >
+              Alexandre Tortoza
+            </a>
+            .
+          </p>
         </div>
       </Container>
     </footer>
