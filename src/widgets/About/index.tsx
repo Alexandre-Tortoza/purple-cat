@@ -5,61 +5,40 @@ import { Container } from '@/shared/ui/Container'
 
 export function About() {
   return (
-    <section id="about" className="border-t border-purple-900/20 bg-[#090710] py-24">
-      <Container className="flex flex-col items-center gap-12 lg:flex-row lg:items-start">
+    <section id="sobre" className="bg-[#0d0917] py-24 sm:py-32">
+      <Container className="grid items-start gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:gap-24">
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
-          className="flex-1"
+          className="lg:sticky lg:top-28"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Sobre o{' '}
-            <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
-              Purple Cat
-            </span>
+          <p className="text-xs font-medium tracking-[0.26em] text-purple-300 uppercase">Sobre o Purple Cat</p>
+          <h2 className="mt-5 text-4xl leading-none tracking-tight text-white sm:text-5xl">
+            Música para estar presente.
           </h2>
-
-          <div className="mt-6 space-y-4 text-zinc-400">
-            <p>
-              Purple Cat é mais que um bar de jazz — é um refúgio para os amantes da
-              música ao vivo e da boa companhia. Aqui, cada noite conta uma história
-              diferente.
-            </p>
-            <p>
-              Entre sons de saxofone, luzes baixas e a energia única do jazz, criamos
-              um ambiente onde o tempo parece parar. Venha descobrir o seu lugar
-              favorito na cidade.
-            </p>
-          </div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="flex-1"
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="max-w-2xl space-y-6 text-lg leading-relaxed text-zinc-400"
         >
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { label: 'Shows por Ano', value: '200+' },
-              { label: 'Artistas', value: '150+' },
-              { label: 'Gin & Tônicas', value: '50+' },
-              { label: 'Noites Memoráveis', value: '∞' },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-xl border border-purple-900/30 bg-purple-950/20 p-5 text-center"
-              >
-                <div className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-2xl font-bold text-transparent">
-                  {stat.value}
-                </div>
-                <div className="mt-1 text-xs text-zinc-500">{stat.label}</div>
-              </div>
-            ))}
-          </div>
+          <p>
+            O Purple Cat nasceu da vontade de criar um espaço onde a música pudesse ocupar o centro da experiência.
+          </p>
+          <p>
+            Inspirado pelos listening bars e pelos kissaten japoneses, o espaço combina curadoria musical, discos de vinil, coquetelaria e uma cozinha feita para acompanhar cada momento.
+          </p>
+          <p>
+            Mais do que um bar, o Purple Cat é um lugar para descobrir artistas, ouvir álbuns completos, compartilhar referências e encontrar pessoas que também acreditam que música merece atenção.
+          </p>
+          <p className="font-heading text-2xl leading-snug text-zinc-200 sm:text-3xl">
+            Sem pressa. Sem excesso. Apenas boa música, bons drinks e encontros que fazem sentido.
+          </p>
         </motion.div>
       </Container>
     </section>
