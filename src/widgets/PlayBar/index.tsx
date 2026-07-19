@@ -5,7 +5,7 @@ import { motion, useMotionValueEvent, useScroll } from 'motion/react'
 import type { Track } from '@/entities'
 import { usePlayTrack } from '@/features/PlayTrack'
 import { useAppAnimation } from '@/features/AppAnimation'
-import { PauseIcon, PlayIcon } from '@/shared/ui/icons'
+import { PauseIcon, PlayIcon, SkipNextIcon, SkipPrevIcon } from '@/shared/ui/icons'
 import { Container } from '@/shared/ui/Container'
 import { TRANSITION_SLIDE_IN } from '@/shared/lib/animations'
 
@@ -73,7 +73,7 @@ function PlaybackControl({ track, isPlaying, pause, toggle }: PlaybackControlPro
 }
 
 export function PlayBar() {
-  const { currentTrack, isPlaying, pause, toggle } = usePlayTrack()
+  const { currentTrack, isPlaying, pause, toggle, next, prev } = usePlayTrack()
   const { phase } = useAppAnimation()
   const { scrollY } = useScroll()
   const [isScrolled, setIsScrolled] = useState(false)
@@ -81,6 +81,8 @@ export function PlayBar() {
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setIsScrolled(latest > 20)
   })
+
+  const cover = currentTrack ? `https://img.youtube.com/vi/${currentTrack.src}/mqdefault.jpg` : null
 
   return (
     <motion.div
@@ -98,14 +100,42 @@ export function PlayBar() {
       }}
       className="fixed bottom-0 left-0 right-0 z-40 transition-all duration-700 ease-out"
     >
-      <Container className="flex h-full items-center justify-between gap-4">
-        <PlaybackControl
-          key={currentTrack?.id ?? 'empty'}
-          track={currentTrack}
-          isPlaying={isPlaying}
-          pause={pause}
-          toggle={toggle}
-        />
+      <Container className="flex h-full items-center justify-between gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          {cover && (
+            <img
+              src={cover}
+              alt=""
+              className="h-9 w-9 shrink-0 rounded object-cover ring-1 ring-white/10 sm:h-10 sm:w-10"
+            />
+          )}
+
+          <button
+            type="button"
+            onClick={prev}
+            aria-label="Faixa anterior"
+            className="text-zinc-500 transition-colors hover:text-zinc-200"
+          >
+            <SkipPrevIcon />
+          </button>
+
+          <PlaybackControl
+            key={currentTrack?.id ?? 'empty'}
+            track={currentTrack}
+            isPlaying={isPlaying}
+            pause={pause}
+            toggle={toggle}
+          />
+
+          <button
+            type="button"
+            onClick={next}
+            aria-label="Próxima faixa"
+            className="text-zinc-500 transition-colors hover:text-zinc-200"
+          >
+            <SkipNextIcon />
+          </button>
+        </div>
 
         <div className="min-w-0 text-right">
           <p className="truncate text-sm font-medium text-zinc-100">{currentTrack?.artist ?? 'Purple Cat'}</p>

@@ -278,13 +278,13 @@ function CardFace({ side, activeTab, onFlip, isFlipping }: CardFaceProps) {
       {/* Lista de drinks com scrollbar */}
       <div
         data-lenis-prevent
-        className={`mt-4 flex-1 overflow-y-auto pr-2
+        className={`mt-4 min-h-0 flex-1 touch-pan-y overflow-y-auto overscroll-contain pr-2
           [scrollbar-width:thin]
-          [scrollbar-color:#000_transparent]
+          [scrollbar-color:#a855f7_transparent]
           [&::-webkit-scrollbar]:w-[5px]
           [&::-webkit-scrollbar-track]:bg-transparent
           [&::-webkit-scrollbar-thumb]:rounded-full
-          [&::-webkit-scrollbar-thumb]:bg-black`}
+          [&::-webkit-scrollbar-thumb]:bg-purple-500`}
       >
         {items.map((item, index) => (
           <div key={item.name} className={`flex gap-4 border-b py-4 last:border-0 ${t.divider}`}>

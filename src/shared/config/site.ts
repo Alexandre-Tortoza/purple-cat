@@ -178,6 +178,15 @@ export const GALLERY_ITEMS = [
   },
 ] as const
 
+// ─── Faixas de áudio (placeholder — YouTube IDs) ──────────────────────────────
+// Substituir por arquivos de áudio licenciados quando disponíveis.
+// Os títulos e artistas devem ser atualizados com os nomes reais dos vídeos.
+export const TRACKS = [
+  { id: 'PHdU5sHigYQ', title: 'Purple Cat Seleção 01', artist: 'Purple Cat Radio', src: 'PHdU5sHigYQ', duration: 0 },
+  { id: '-mZ54FJ6h-k', title: 'Purple Cat Seleção 02', artist: 'Purple Cat Radio', src: '-mZ54FJ6h-k', duration: 0 },
+  { id: '9DVYNklXcX0', title: 'Purple Cat Seleção 03', artist: 'Purple Cat Radio', src: '9DVYNklXcX0', duration: 0 },
+]
+
 // ─── FAQs ─────────────────────────────────────────────────────────────────────
 export const FAQS = [
   { question: 'Precisa reservar?', answer: 'As regras podem variar conforme o dia e a programação. Consulte nossa equipe antes da visita.' },

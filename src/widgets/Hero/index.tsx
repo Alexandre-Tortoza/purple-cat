@@ -10,11 +10,19 @@ type Phase = 'loading' | 'revealing' | 'joined' | 'settled'
 
 export function Hero() {
   const [phase, setPhase] = useState<Phase>('loading')
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const revealTimer = window.setTimeout(() => setPhase('revealing'), 300)
-    const joinTimer = window.setTimeout(() => setPhase('joined'), 1700)
-    const settleTimer = window.setTimeout(() => setPhase('settled'), 2750)
+    const check = () => setIsMobile(window.innerWidth < 640)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+  useEffect(() => {
+    const revealTimer = window.setTimeout(() => setPhase('revealing'), 200)
+    const joinTimer = window.setTimeout(() => setPhase('joined'), 900)
+    const settleTimer = window.setTimeout(() => setPhase('settled'), 1800)
 
     return () => {
       window.clearTimeout(revealTimer)
@@ -29,12 +37,14 @@ export function Hero() {
       <Container className="relative flex min-h-svh items-center overflow-hidden py-24 sm:py-32">
         {phase !== 'loading' && (
           <motion.div
-            className="absolute top-1/2 z-10 hidden sm:block"
+            className="absolute top-1/2 z-10"
             initial={{ left: '50%', x: '-50%', y: '-50%', scale: 0.45, opacity: 0 }}
             animate={
               phase === 'revealing' || phase === 'joined'
                 ? { left: '50%', x: '-50%', y: '-50%', scale: 0.8, opacity: 1 }
-                : { left: '75%', x: '-50%', y: '-50%', scale: 1.65, opacity: 1 }
+                : isMobile
+                  ? { left: '50%', x: '-50%', y: '-50%', scale: 1.1, opacity: 0.35 }
+                  : { left: '75%', x: '-50%', y: '-50%', scale: 1.65, opacity: 1 }
             }
             transition={{
               left: { duration: DURATION.xslow, ease: EASE.standard },
