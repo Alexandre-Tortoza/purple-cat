@@ -20,8 +20,20 @@ body {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
+}
+
+::selection {
+  background: #7c3aed;
+  color: white;
+}
+
+@media (pointer: coarse) {
+  * {
+    cursor: auto;
+  }
 }

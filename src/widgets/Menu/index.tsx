@@ -30,7 +30,7 @@ export function Menu() {
           >
             <div className="flex items-center justify-between">
               <span className="font-semibold text-purple-400">{SITE.name}</span>
-              <button onClick={close} className="rounded-full p-1 hover:bg-purple-950" aria-label="Close menu">
+              <button onClick={close} className="rounded-full p-1 hover:bg-purple-950" aria-label="Fechar menu">
                 <CloseIcon />
               </button>
             </div>

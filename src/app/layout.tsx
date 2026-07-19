@@ -33,8 +33,8 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Purple Cat Jazz Bar",
-  description: "Onde o jazz encontra o mistério",
+  title: "Purple Cat | Listening Bar & Records em Curitiba",
+  description: "Música, drinks, cozinha e discos de vinil em Curitiba.",
 };
 
 export default function RootLayout({
